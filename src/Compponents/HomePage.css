@@ -1,0 +1,203 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  .notes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -300px;
+    content: wrap;
+  }
+ 
+  .form-container {
+    background-color: rgb(255, 255, 255);
+    width: 285%;
+    margin-right: -180%;
+    height: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 60%;
+    margin-left: 100%;
+    border-radius: 3%;
+  }
+  
+  .custom-card {
+    margin-top: 1%;
+    min-width: 300px;
+    min-height: 200px;
+    display: flex;
+    margin-left:40%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    background-color: rgb(254, 255, 255);
+    border-radius: 5%;
+    border-color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .custom-card-body {
+    padding: 20px;
+    
+  }
+  
+  .custom-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .custom-card-text {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .custom-button {
+    margin-right: 10px;
+  }
+  
+  .edit-button {
+    
+    color: white;
+  }
+  
+  .delete-button {
+    
+    color: white;
+  }
+  .sidebar {
+    width: 250px;
+    height: 1149px;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    /* margin-left: -7%; */
+    z-index: 999;
+  }
+  
+  .sidebar .column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+    padding-left: 30px;
+    padding-top: 70px;
+  }
+  
+  .sidebar .column button {
+    margin-bottom: 10px;
+    font-size: 110%;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .sidebar {
+      left: 0;
+      transition: left 0.3s ease-in-out;
+    }
+  }
+  
+   
+   
+  
+  .dashboard-button,
+.help-button {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  background-color: transparent;
+  color: #000;
+  text-decoration: none;
+  font-size: 10px;
+}
+
+.dashboard-button:hover,
+.help-button:hover {
+  background-color: #d4d0d0;
+}
+
+.dashboard-button svg,
+.help-button svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+.h1 {
+  color: blue;
+  display: flex;
+   margin-bottom: 30%;
+}
+.task-card{
+  display: flex;
+  justify-content: center;
+  margin-left: 40%;
+  margin-top: 10%;
+}
+.Th1{
+  display: flex;
+  justify-content: center;
+}
+.Notes-pa{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -600px;
+  content: wrap;
+}
+.c-card{
+  margin-top: 1%;
+  min-width: 300px;
+  min-height: 200px;
+  display: flex;
+  margin-left:40%;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  background-color: rgba(140, 208, 235, 0.557);
+  border-radius: 5%;
+  border-color: black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.c-card-body {
+  padding: 20px;
+  
+}
+
+.c-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.c-card-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.c-button {
+  margin-right: 10px;
+}
+
+.group{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+ width: 100%;
+
+  content: wrap;  
+}
+.butn{
+  display: flex;
+  margin-top: 10%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+ width: 100%;
+}
