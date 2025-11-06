@@ -12,8 +12,14 @@ const HomePage = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleAddNote = () => {
-    addNote(title, description);notePaage
+  const handleAddNote = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const trimmedTitle = title.trim();
+    const trimmedDescription = description.trim();
+    if (!trimmedTitle && !trimmedDescription) {
+      return;
+    }
+    addNote(trimmedTitle, trimmedDescription);
     setTitle('');
     setDescription('');
     setShowModal(false);
@@ -43,17 +49,20 @@ const HomePage = () => {
     <div>
      
     <Row>
-      <Col sm={4}>
+      <Col xs={{ span: 12, order: 2 }} md={{ span: 4, order: 1 }}>
         <div className="Container">
           <div className="form-container">
           <h3> Note</h3>
-  <Form>
+  <Form onSubmit={handleAddNote}>
     <Form.Group  controlId="title">
       <Form.Label>Title</Form.Label>
       <Form.Control
         type="text"
+        placeholder="Enter title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        autoFocus
+        maxLength={120}
       />
     </Form.Group>
     <Form.Group controlId="description">
@@ -61,21 +70,22 @@ const HomePage = () => {
       <Form.Control
         as="textarea"
         rows={3}
+        placeholder="Write your note..."
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        maxLength={2000}
       />
     </Form.Group>
-    <Button style={{color:'black'}} variant="link" block onClick={handleAddNote}>
-    <h1>  Add Note </h1>
+    <Button style={{color:'black'}} variant="primary" type="submit" disabled={!title.trim() && !description.trim()}>
+      Add Note
     </Button>
   </Form>
 </div>
         </div>
       </Col>
-      <Col sm={12}>
+      <Col xs={{ span: 12, order: 1 }} md={{ span: 8, order: 2 }}>
   <div className="notes">
-    <h1>    
-      My Notes</h1>
+    
     <div className="row">
       {notes.map((note, index) => (
         <div key={index} className="col-md-4">

@@ -1,58 +1,95 @@
+/* Full-page gradient background for glass effect */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 45%, #0ea5e9 100%);
+  background-attachment: fixed;
+}
+
 .Container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 16px;
   }
   .notes{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: -300px;
-    content: wrap;
+    width: 100%;
+    margin-top: 0;
+    padding: 16px 0;
   }
  
   .form-container {
-    background-color: rgb(255, 255, 255);
-    width: 285%;
-    margin-right: -180%;
-    height: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    margin-bottom: 60%;
-    margin-left: 100%;
-    border-radius: 3%;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto 24px;
+    height: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
   }
   
   .custom-card {
     margin-top: 1%;
     min-width: 300px;
     min-height: 200px;
-    display: flex;
-    margin-left:40%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    background-color: rgb(254, 255, 255);
-    border-radius: 5%;
-    border-color: black;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  margin-left: 0;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
   }
   
   .custom-card-body {
     padding: 20px;
-    
+  width: 100%;
+  overflow: hidden;
   }
   
   .custom-card-title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   }
   
   .custom-card-text {
     font-size: 16px;
     margin-bottom: 10px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  }
+
+  /* Responsive grid for notes list */
+  .notes .row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 576px) {
+    .notes .row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 992px) {
+    .notes .row {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
   
   .custom-button {
@@ -68,23 +105,30 @@
     
     color: white;
   }
-  .sidebar {
-    width: 250px;
-    height: 1149px;
-    background-color: #ffffff;
-    position: fixed;
-    top: 0;
-    /* margin-left: -7%; */
-    z-index: 999;
-  }
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 250px;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0;
+}
   
   .sidebar .column {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-top: 20px;
-    padding-left: 30px;
-    padding-top: 70px;
+    padding: 72px 16px 16px 24px;
   }
   
   .sidebar .column button {
@@ -92,12 +136,85 @@
     font-size: 110%;
   }
   
-  @media screen and (max-width: 768px) {
-    .sidebar {
-      left: 0;
-      transition: left 0.3s ease-in-out;
-    }
+@media screen and (max-width: 768px) {
+  .sidebar.open + .main-content {
+    pointer-events: none;
   }
+}
+
+/* Layout for main content with/without sidebar */
+.main-content {
+  padding: 24px;
+  transition: margin-left 0.3s ease-in-out;
+  min-height: 100vh;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.main-content.with-sidebar {
+  margin-left: 250px;
+}
+
+@media screen and (max-width: 992px) {
+  .main-content.with-sidebar {
+    margin-left: 0;
+  }
+}
+
+/* Hamburger button */
+.sidebar-toggle {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.sidebar-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #111827;
+}
+
+/* Dark overlay shown only on small screens when the sidebar is open */
+.backdrop {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .sidebar-toggle {
+    top: 12px;
+    left: 12px;
+    width: 48px;
+    height: 48px;
+    z-index: 1200;
+  }
+
+  .backdrop {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 900;
+  }
+}
   
    
    
@@ -119,7 +236,8 @@
 
 .dashboard-button:hover,
 .help-button:hover {
-  background-color: #d4d0d0;
+  background-color: #1e40af;
+  color: #ffffff;
 }
 
 .dashboard-button svg,
@@ -127,6 +245,85 @@
   width: 24px;
   height: 24px;
   margin-right: 10px;
+}
+.help-button,
+.dashboard-button,
+.custom-button,
+.edit-button,
+.delete-button,
+.sidebar-toggle,
+.btn {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.help-button:hover,
+.dashboard-button:hover,
+.custom-button:hover,
+.edit-button:hover,
+.delete-button:hover,
+.sidebar-toggle:hover,
+.btn:hover,
+.help-button:focus-visible,
+.dashboard-button:focus-visible,
+.custom-button:focus-visible,
+.edit-button:focus-visible,
+.delete-button:focus-visible,
+.sidebar-toggle:focus-visible,
+.btn:focus-visible {
+  transform: scale(1.04);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+/* Blue hover background with white text for all main buttons/links */
+.help-button:hover,
+.dashboard-button:hover,
+.custom-button:hover,
+.edit-button:hover,
+.delete-button:hover,
+.sidebar-toggle:hover,
+.btn:hover,
+.help-button:focus-visible,
+.dashboard-button:focus-visible,
+.custom-button:focus-visible,
+.edit-button:focus-visible,
+.delete-button:focus-visible,
+.sidebar-toggle:focus-visible,
+.btn:focus-visible {
+  background-color: #1e40af;
+  color: #ffffff;
+  border-color: #1e40af;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .help-button,
+  .dashboard-button,
+  .custom-button,
+  .edit-button,
+  .delete-button,
+  .sidebar-toggle,
+  .btn {
+    transition: none;
+  }
+
+  .help-button:hover,
+  .dashboard-button:hover,
+  .custom-button:hover,
+  .edit-button:hover,
+  .delete-button:hover,
+  .sidebar-toggle:hover,
+  .btn:hover,
+  .help-button:focus-visible,
+  .dashboard-button:focus-visible,
+  .custom-button:focus-visible,
+  .edit-button:focus-visible,
+  .delete-button:focus-visible,
+  .sidebar-toggle:focus-visible,
+  .btn:focus-visible {
+    transform: none;
+    box-shadow: none;
+  }
 }
 .h1 {
   color: blue;
@@ -136,8 +333,8 @@
 .task-card{
   display: flex;
   justify-content: center;
-  margin-left: 40%;
-  margin-top: 10%;
+  margin-left: 0;
+  margin-top: 24px;
 }
 .Th1{
   display: flex;
@@ -146,38 +343,45 @@
 .Notes-pa{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: -600px;
-  content: wrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin-top: 0;
 }
 .c-card{
   margin-top: 1%;
   min-width: 300px;
   min-height: 200px;
   display: flex;
-  margin-left:40%;
+  margin-left: 0;
   justify-content: flex-start;
-  flex-wrap: wrap;
-  background-color: rgba(140, 208, 235, 0.557);
-  border-radius: 5%;
-  border-color: black;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  flex-wrap: nowrap;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 }
 .c-card-body {
   padding: 20px;
-  
+  width: 100%;
+  overflow: hidden;
 }
 
 .c-card-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .c-card-text {
   font-size: 16px;
   margin-bottom: 10px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .c-button {
